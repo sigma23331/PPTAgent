@@ -1,0 +1,321 @@
+{
+  "pages": [
+    {
+      "pageCategory": "标题页",
+      "specialContent": "MM-LLMs: Recent Advances in MultiModal Large Language Models",
+      "subTitle": "Duzhen Zhang1*, Yahan Vu2*, Chenxing Li1, Jiahua Dong3†, Dan Su1, Chenhui Chu2† and Dong Vu1",
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "目录页",
+      "specialContent": [
+        "引言",
+        "模型架构",
+        "训练流程",
+        "SOTA MM-LLMs",
+        "基准与性能",
+        "未来方向"
+      ],
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "章节标题页",
+      "chapterNumber": 1,
+      "specialContent": "引言",
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "具体内容页",
+      "specialContent": null,
+      "pageTheme": "MM-LLMs概述",
+      "pageTypeSet": [
+        "经典标题+内容型"
+      ],
+      "content": [
+        {
+          "unitSummary": "MM-LLMs的定义与背景",
+          "unitText": [
+            "MM-LLMs通过低成本训练策略增强现有LLMs，使其支持多模态输入输出",
+            "核心挑战在于如何有效连接不同模态的预训练模型以实现协同推理",
+            "主流方法采用多模态预训练(PT)+指令微调(IT)的流程来优化模态对齐"
+          ]
+        },
+        {
+          "unitSummary": "发展历程",
+          "unitText": [
+            "GPT-4(Vision)和Gemini展示了强大的多模态理解生成能力，引发研究热潮",
+            "初期研究聚焦图文理解(如BLIP-2/LLaVA)，逐步扩展到视频、音频等多模态",
+            "最新趋势是实现任意模态间的转换，如NExT-GPT等端到端模型"
+          ]
+        }
+      ],
+      "figure": [
+        {
+          "name": "images/f3e3fbb451befa65f0f25bb012b276f66a90a8a60d81415e7517f42ce4adcb87.jpg",
+          "content": "Figure 1: MM-LLMs发展时间线，展示从初期理解模型到任意模态转换的演进过程"
+        }
+      ]
+    },
+    {
+      "pageCategory": "章节标题页",
+      "chapterNumber": 2,
+      "specialContent": "模型架构",
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "具体内容页",
+      "specialContent": null,
+      "pageTheme": "核心组件",
+      "pageTypeSet": [
+        "多层次内容展示型"
+      ],
+      "content": [
+        {
+          "unitSummary": "整体架构设计",
+          "unitText": [
+            "包含5个关键组件：模态编码器、输入投影器、LLM骨干、输出投影器、模态生成器",
+            "仅理解模型包含前3个组件，生成模型需完整5组件",
+            "可训练参数占比约2%，主要依赖LLM骨干的规模"
+          ]
+        },
+        {
+          "unitSummary": "模态编码器",
+          "unitText": [
+            "图像编码：CLIP ViT/Eva-CLIP ViT等视觉Transformer，支持224-448px分辨率",
+            "视频编码：统一采样5帧，处理方式与图像相同",
+            "音频编码：HuBERT/Whisper等语音模型，3D点云使用ULIP-2编码",
+            "多模态统一编码：ImageBind支持6种模态的联合编码"
+          ]
+        },
+        {
+          "unitSummary": "输入投影器",
+          "unitText": [
+            "将其他模态特征对齐到文本空间，最小化条件文本生成损失",
+            "实现方式包括：线性投影/Q-Former/Cross-attention等",
+            "Q-Former需要额外预训练初始化，但能提取更相关特征"
+          ]
+        }
+      ],
+      "figure": [
+        {
+          "name": "images/4c3498d8bc851fa8c4f7f0a4f11d5dc4046191b69baaa9d2cb60b4d54585937a.jpg",
+          "content": "Figure 2: 完整模型架构图，展示各组件连接关系与典型实现方案"
+        }
+      ]
+    },
+    {
+      "pageCategory": "具体内容页",
+      "specialContent": null,
+      "pageTheme": "LLM与生成组件",
+      "pageTypeSet": [
+        "经典标题+内容型"
+      ],
+      "content": [
+        {
+          "unitSummary": "LLM骨干",
+          "unitText": [
+            "继承零样本泛化、思维链等特性，处理跨模态语义理解与推理",
+            "主流选择：LLaMA-2/Vicuna等开源模型，参数量从7B到70B不等",
+            "可结合LoRA等参数高效微调方法，新增参数<0.1%"
+          ]
+        },
+        {
+          "unitSummary": "输出投影器与生成器",
+          "unitText": [
+            "将LLM输出的信号token映射为生成器可理解的特征",
+            "模态生成器多采用现成LDM模型：Stable Diffusion(图像)/Zeroscope(视频)",
+            "训练时通过VAE+Unet计算条件生成损失，优化投影器参数"
+          ]
+        }
+      ],
+      "figure": []
+    },
+    {
+      "pageCategory": "章节标题页",
+      "chapterNumber": 3,
+      "specialContent": "训练流程",
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "具体内容页",
+      "specialContent": null,
+      "pageTheme": "两阶段训练",
+      "pageTypeSet": [
+        "流程型"
+      ],
+      "content": [
+        {
+          "unitSummary": "多模态预训练(PT)",
+          "unitText": [
+            "使用X-Text数据集(图文对/交错图文语料)训练投影器",
+            "理解模型仅优化文本生成目标，生成模型需联合优化生成损失",
+            "典型数据集：LAION-5B(59亿图文对)、COYO(7.47亿)、Conceptual 12M等"
+          ]
+        },
+        {
+          "unitSummary": "多模态指令微调(IT)",
+          "unitText": [
+            "将PT数据转换为指令感知格式，增强零样本能力",
+            "包含监督微调(SFT)和基于人类反馈的强化学习(RLHF)两个阶段",
+            "SFT数据形式：单轮QA(如VQA数据)或多轮对话(平均2-5轮)"
+          ]
+        }
+      ],
+      "figure": [
+        {
+          "name": "images/c6132e281b795253907bfea46bb8686cd7be26f815edc642bd4696d9c06bbff4.jpg",
+          "content": "Figure 3: 训练流程示意图，展示PT与IT阶段的数据流与优化目标"
+        }
+      ]
+    },
+    {
+      "pageCategory": "具体内容页",
+      "specialContent": null,
+      "pageTheme": "数据集与优化",
+      "pageTypeSet": [
+        "数据型"
+      ],
+      "content": [
+        {
+          "unitSummary": "关键数据集",
+          "unitText": [
+            "PT阶段：图像-文本(LAION/COCO)、视频-文本(WebVid)、音频-文本(WaveCaps)",
+            "SFT阶段：LLaVA(15万实例)、ShareGPT4V(高质量人工标注)、M3IT(240万)",
+            "RLHF阶段：人工标注偏好数据(平均1.4-10K实例)"
+          ]
+        },
+        {
+          "unitSummary": "优化技巧",
+          "unitText": [
+            "提高图像分辨率(336×336→448×448)增强细粒度理解",
+            "交错图文数据比单纯图文对更有效，准确率提升5-8%",
+            "混合纯文本指令数据可缓解文本任务性能下降"
+          ]
+        }
+      ],
+      "figure": []
+    },
+    {
+      "pageCategory": "章节标题页",
+      "chapterNumber": 4,
+      "specialContent": "SOTA MM-LLMs",
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "具体内容页",
+      "specialContent": null,
+      "pageTheme": "模型分类与比较",
+      "pageTypeSet": [
+        "对比型"
+      ],
+      "content": [
+        {
+          "unitSummary": "设计分类",
+          "unitText": [
+            "工具调用型：如VisualChatGPT通过外部工具链处理多模态任务",
+            "端到端型：NExT-GPT等实现全模型联合训练，减少误差传播"
+          ]
+        },
+        {
+          "unitSummary": "模态支持",
+          "unitText": [
+            "纯理解模型(Flamingo/BLIP-2)：仅支持多模态输入→文本输出",
+            "生成模型(GILL/MiniGPT-5)：支持特定模态输出(如图文生成)",
+            "任意模态模型(CoDi-2)：实现端到端的多模态互转"
+          ]
+        }
+      ],
+      "figure": [
+        {
+          "name": "images/3b09edb1127fd8f6f45fe3ce719528cd3e932f204ffc5127aa9a856ed82ddb45.jpg",
+          "content": "Table 1: 43种主流MM-LLMs的详细对比，包含输入输出模态、骨干架构等"
+        }
+      ]
+    },
+    {
+      "pageCategory": "章节标题页",
+      "chapterNumber": 5,
+      "specialContent": "基准与性能",
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "具体内容页",
+      "specialContent": null,
+      "pageTheme": "综合性能评估",
+      "pageTypeSet": [
+        "数据与结果展示型"
+      ],
+      "content": [
+        {
+          "unitSummary": "测试基准",
+          "unitText": [
+            "覆盖18个VL基准：VQA-v2(视觉问答)、GQA(推理问答)、MME(多模态评估)等",
+            "包含理解(OKVQA)、生成(POPE)、推理(MM-Vet)等多样化任务",
+            "测试分辨率从224px到448px不等，评估细粒度理解能力"
+          ]
+        },
+        {
+          "unitSummary": "关键结果",
+          "unitText": [
+            "最佳模型VILA-13B在80.8%基准领先，加入ShareGPT4V数据后提升3-7%",
+            "Qwen-VL在中文场景表现突出，图文生成质量优于Stable Diffusion",
+            "推理任务平均准确率58.7%，较传统方案提升40%以上"
+          ]
+        }
+      ],
+      "figure": [
+        {
+          "name": "images/5c74b5db8c6523237118734725936d26b41d1f2d8aee3bd5a0cfdf19523a6543.jpg",
+          "content": "Table 2: 详细性能对比表，红色/蓝色分别标记第一/第二名结果"
+        }
+      ]
+    },
+    {
+      "pageCategory": "章节标题页",
+      "chapterNumber": 6,
+      "specialContent": "未来方向",
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "具体内容页",
+      "specialContent": null,
+      "pageTheme": "研究方向展望",
+      "pageTypeSet": [
+        "多段落型"
+      ],
+      "content": [
+        {
+          "unitSummary": "模型增强",
+          "unitText": [
+            "扩展模态：支持网页/热力图等新模态，提升通用性",
+            "架构优化：轻量化部署(MobileVLM参数<20M)，适应移动/IoT设备",
+            "持续学习：解决灾难性遗忘问题，支持增量更新"
+          ]
+        },
+        {
+          "unitSummary": "评估体系",
+          "unitText": [
+            "构建更大规模跨模态基准：如MathVista测试数学推理",
+            "开发专业领域评估：MMMU涵盖57个学科的专业知识测试",
+            "增强安全评估：检测生成内容的幻觉问题(当前错误率>30%)"
+          ]
+        }
+      ],
+      "figure": []
+    },
+    {
+      "pageCategory": "结尾页",
+      "specialContent": "感谢聆听",
+      "pageTheme": null,
+      "content": []
+    }
+  ]
+}

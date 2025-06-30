@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>模型变体</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .slide-container {
+      width: 960px;
+      height: 540px;
+      background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
+      color: white;
+      overflow: hidden;
+      position: relative;
+      padding: 2rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .geometric-shape {
+      position: absolute;
+      opacity: 0.1;
+      z-index: 0;
+    }
+
+    .shape-1 {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: white;
+      top: -150px;
+      right: -100px;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      height: 100%;
+    }
+
+    .left-col, .right-col {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .content-section {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(5px);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .section-icon {
+      font-size: 2rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 0.75rem;
+    }
+
+    .content-text {
+      font-family: 'Georgia', serif;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .content-text li {
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight {
+      color: #90cdf4;
+      font-weight: bold;
+    }
+
+    .image-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      max-height: 220px;
+      object-fit: contain;
+    }
+
+    .image-caption {
+      color: #cbd5e0;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      font-style: italic;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="geometric-shape shape-1"></div>
+    <h1>模型变体</h1>
+    <div class="content-wrapper">
+      <div class="left-col">
+        <div class="content-section">
+          <i class="fas fa-project-diagram section-icon"></i>
+          <h2>注意力头和键值维度</h2>
+          <ul class="content-text list-disc pl-6">
+            <li>改变 <span class="highlight">注意力头</span> 的数量和注意力 <span class="highlight">键</span> 与 <span class="highlight">值</span> 的维度</li>
+            <li>保持 <span class="highlight">计算量不变</span></li>
+          </ul>
+        </div>
+        <div class="content-section">
+          <i class="fas fa-expand-arrows-alt section-icon"></i>
+          <h2>模型大小和dropout</h2>
+          <ul class="content-text list-disc pl-6">
+            <li><span class="highlight">更大的模型</span> 表现更好</li>
+            <li><span class="highlight">dropout</span> 在避免过拟合方面非常有帮助</li>
+          </ul>
+        </div>
+        <div class="content-section">
+          <i class="fas fa-brain section-icon"></i>
+          <h2>注意力模型的未来</h2>
+          <ul class="content-text list-disc pl-6">
+            <li>计划将 <span class="highlight">Transformer</span> 扩展到涉及 <span class="highlight">文本以外</span> 的输入和输出模态的问题</li>
+            <li>研究 <span class="highlight">局部</span>、<span class="highlight">受限</span> 的注意力机制以有效处理 <span class="highlight">大输入和输出</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="right-col flex items-center justify-center">
+        <div class="image-container">
+          <img src="images/7e7fa066bb176d8bf1c6136c33099584a66995440300c94eb824da2284784bc8.jpg" alt="Transformer架构的变体">
+          <div class="image-caption">Transformer架构的变体</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

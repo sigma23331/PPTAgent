@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数据集与优化</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+      <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+      .slide-container {
+        width: 1280px;
+        height: 720px;
+        background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
+        color: white;
+        font-family: 'Arial', sans-serif;
+        overflow: hidden;
+        position: relative;
+        padding: 4rem;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        font-size: 2.8rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 1rem;
+      }
+
+      .content-text {
+        font-family: 'Georgia', serif;
+        font-size: 1.2rem;
+        line-height: 1.6;
+        opacity: 0.9;
+      }
+
+      .content-section {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 1.5rem;
+        backdrop-filter: blur(5px);
+      }
+
+      .geometric-shape {
+        position: absolute;
+        opacity: 0.1;
+        z-index: 0;
+      }
+
+      .shape-1 {
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        background: white;
+        top: -200px;
+        right: -100px;
+      }
+
+      .content-wrapper {
+        position: relative;
+        z-index: 1;
+      }
+
+      .highlight {
+        color: #90cdf4;
+        font-weight: bold;
+      }
+
+      .future-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: rgba(255, 255, 255, 0.85);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container">
+      <div class="geometric-shape shape-1"></div>
+      <div class="content-wrapper">
+        <h1>数据集与优化</h1>
+
+        <div class="flex flex-row space-x-10">
+          <div class="w-1/2 flex flex-col items-center text-center">
+            <i class="fas fa-database future-icon"></i>
+            <div class="content-section w-full">
+              <h2>关键数据集</h2>
+              <ul class="content-text list-disc pl-8 space-y-4 text-left">
+                <li>PT阶段：图像-文本(<span class="highlight">LAION/COCO</span>)、视频-文本(<span class="highlight">WebVid</span>)、音频-文本(<span class="highlight">WaveCaps</span>)</li>
+                <li>SFT阶段：<span class="highlight">LLaVA</span>(15万实例)、<span class="highlight">ShareGPT4V</span>(高质量人工标注)、<span class="highlight">M3IT</span>(240万)</li>
+                <li>RLHF阶段：人工标注偏好数据(平均1.4-10K实例)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="w-1/2 flex flex-col items-center text-center">
+            <i class="fas fa-tachometer-alt future-icon"></i>
+            <div class="content-section w-full">
+              <h2>优化技巧</h2>
+              <ul class="content-text list-disc pl-8 space-y-4 text-left">
+                <li>提高图像分辨率(<span class="highlight">336×336→448×448</span>)增强细粒度理解</li>
+                <li>交错图文数据比单纯图文对更有效，准确率提升<span class="highlight">5-8%</span></li>
+                <li>混合纯文本指令数据可缓解文本任务性能下降</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

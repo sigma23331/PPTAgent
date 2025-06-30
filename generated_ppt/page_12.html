@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>模型分类与比较</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
+      color: white;
+      overflow: hidden;
+      position: relative;
+      padding: 2rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      counter-reset: content-section-count;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 0.75rem;
+    }
+
+    .content-section {
+      counter-increment: content-section-count;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(5px);
+    }
+
+    .slide-container:has(.content-section:nth-of-type(2):last-of-type) .content-section {
+      padding: 3rem;
+    }
+
+    .slide-container:not(:has(.content-section:nth-of-type(3):last-of-type)) .content-section {
+      padding: 2.5rem;
+    }
+
+    .content-text {
+      font-family: 'Georgia', serif;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .highlight {
+      color: #90cdf4;
+      font-weight: bold;
+    }
+
+    .image-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+    }
+
+    .image-caption {
+      color: #cbd5e0;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      font-style: italic;
+      text-align: center;
+    }
+
+    .geometric-shape {
+      position: absolute;
+      opacity: 0.1;
+      z-index: 0;
+    }
+
+    .shape-1 {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: white;
+      top: -150px;
+      right: -100px;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      height: 100%;
+    }
+
+    .left-col, .right-col {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .left-col:has(.content-section:only-child) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .left-col:has(.content-section:only-child) > .content-section {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="geometric-shape shape-1"></div>
+    <h1>模型分类与比较</h1>
+    <div class="content-wrapper">
+      <div class="left-col">
+        <div class="content-section">
+          <h2><i class="fas fa-project-diagram mr-2"></i>设计分类</h2>
+          <ul class="content-text list-disc pl-6 space-y-2">
+            <li><span class="highlight">工具调用型</span>：如<span class="highlight">VisualChatGPT</span>通过外部工具链处理多模态任务</li>
+            <li><span class="highlight">端到端型</span>：<span class="highlight">NExT-GPT</span>等实现全模型联合训练，减少误差传播</li>
+          </ul>
+        </div>
+        <div class="content-section">
+          <h2><i class="fas fa-layer-group mr-2"></i>模态支持</h2>
+          <ul class="content-text list-disc pl-6 space-y-2">
+            <li>纯理解模型(<span class="highlight">Flamingo</span>/<span class="highlight">BLIP-2</span>)：仅支持多模态输入→文本输出</li>
+            <li>生成模型(<span class="highlight">GILL</span>/<span class="highlight">MiniGPT-5</span>)：支持特定模态输出(如图文生成)</li>
+            <li>任意模态模型(<span class="highlight">CoDi-2</span>)：实现端到端的多模态互转</li>
+          </ul>
+        </div>
+      </div>
+      <div class="right-col flex items-center justify-center">
+        <div class="image-container">
+          <img src="images/3b09edb1127fd8f6f45fe3ce719528cd3e932f204ffc5127aa9a856ed82ddb45.jpg" alt="Table 1: 43种主流MM-LLMs的详细对比，包含输入输出模态、骨干架构等">
+          <div class="image-caption">Table 1: 43种主流MM-LLMs的详细对比，包含输入输出模态、骨干架构等</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

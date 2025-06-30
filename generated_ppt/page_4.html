@@ -1,0 +1,172 @@
+html
+<html lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MM-LLMs概述</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+  </script>
+<script async="" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
+      color: white;
+      overflow: hidden;
+      position: relative;
+      padding: 2rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      counter-reset: content-section-count;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 0.75rem;
+    }
+
+    .content-section {
+      counter-increment: content-section-count;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(5px);
+    }
+
+    .slide-container:has(.content-section:nth-of-type(2):last-of-type) .content-section {
+      padding: 3rem;
+    }
+
+    .slide-container:not(:has(.content-section:nth-of-type(3):last-of-type)) .content-section {
+      padding: 2.5rem;
+    }
+
+    .content-text {
+      font-family: 'Georgia', serif;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .highlight {
+      color: #90cdf4;
+      font-weight: bold;
+    }
+
+    .image-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+    }
+
+    .image-caption {
+      color: #cbd5e0;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      font-style: italic;
+      text-align: center;
+    }
+
+    .geometric-shape {
+      position: absolute;
+      opacity: 0.1;
+      z-index: 0;
+    }
+
+    .shape-1 {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: white;
+      top: -150px;
+      right: -100px;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      height: 100%;
+    }
+
+    .left-col, .right-col {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .left-col:has(.content-section:only-child) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .left-col:has(.content-section:only-child) > .content-section {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+<div class="slide-container">
+<div class="geometric-shape shape-1"></div>
+<h1>MM-LLMs概述</h1>
+<div class="content-wrapper">
+左侧内容区域
+<div class="left-col">
+<div class="content-section">
+<h2><i class="fas fa-info-circle mr-2"></i>MM-LLMs的定义</h2>
+<ul class="content-text list-disc pl-6 space-y-2">
+<li><span class="highlight">MM-LLMs</span>通过低成本训练策略增强现有<span class="highlight">LLMs</span>，使其支持多模态输入输出</li>
+<li>核心挑战在于如何有效连接不同模态的<span class="highlight">预训练模型</span>以实现协同推理</li>
+<li>主流方法采用<span class="highlight">多模态预训练(PT)+指令微调(IT)</span>的流程来优化模态对齐</li>
+</ul>
+</div>
+<div class="content-section">
+<h2><i class="fas fa-history mr-2"></i>发展历程</h2>
+<ul class="content-text list-disc pl-6 space-y-2">
+<li><span class="highlight">GPT-4(Vision)</span>和<span class="highlight">Gemini</span>展示了强大的多模态理解生成能力，引发研究热潮</li>
+<li>初期研究聚焦图文理解(如<span class="highlight">BLIP-2/LLaVA</span>)，逐步扩展到视频、音频等多模态</li>
+<li>最新趋势是实现任意模态间的转换，如<span class="highlight">NExT-GPT</span>等端到端模型</li>
+</ul>
+</div>
+</div>
+右侧插图
+<div class="right-col flex items-center justify-center">
+<div class="image-container">
+<img alt="Figure 1: MM-LLMs发展时间线，展示从初期理解模型到任意模态转换的演进过程" src="/static/images/f3e3fbb451befa65f0f25bb012b276f66a90a8a60d81415e7517f42ce4adcb87.jpg"/>
+<div class="image-caption">Figure 1: MM-LLMs发展时间线，展示从初期理解模型到任意模态转换的演进过程</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

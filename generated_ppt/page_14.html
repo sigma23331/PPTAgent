@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>综合性能评估</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
+      color: white;
+      overflow: hidden;
+      position: relative;
+      padding: 2rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      /* 初始化计数器 */
+      counter-reset: content-section-count;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 0.75rem;
+    }
+
+
+    .content-section {
+      /* 每次 content-section 出现时，计数器加 1 */
+      counter-increment: content-section-count;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(5px);
+    }
+
+    /* 当 content-section 的数量为 2 时 */
+    .slide-container:has(.content-section:nth-of-type(2):last-of-type) .content-section {
+      padding: 3rem;
+    }
+
+    /* 当 content-section 的数量大于等于 3 时 */
+    .slide-container:not(:has(.content-section:nth-of-type(3):last-of-type)) .content-section {
+      padding: 2.5rem;
+    }
+
+    .content-text {
+      font-family: 'Georgia', serif;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .highlight {
+      color: #90cdf4;
+      font-weight: bold;
+    }
+
+    .image-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+    }
+
+    .image-caption {
+      color: #cbd5e0;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      font-style: italic;
+      text-align: center;
+    }
+
+    .geometric-shape {
+      position: absolute;
+      opacity: 0.1;
+      z-index: 0;
+    }
+
+    .shape-1 {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: white;
+      top: -150px;
+      right: -100px;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      height: 100%;
+    }
+
+    .left-col, .right-col {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* 当 left-col 只有一个 content-section 时 */
+    .left-col:has(.content-section:only-child) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 移除 content-section 的 margin-bottom，防止影响居中 */
+    .left-col:has(.content-section:only-child) > .content-section {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="geometric-shape shape-1"></div>
+    <h1>综合性能评估</h1>
+    <div class="content-wrapper">
+      <!-- 左侧内容区域 -->
+      <div class="left-col">
+        <div class="content-section">
+          <h2><i class="fas fa-tachometer-alt mr-2"></i>测试基准</h2>
+          <ul class="content-text list-disc pl-6 space-y-2">
+            <li>覆盖<span class="highlight">18个VL基准</span>：<span class="highlight">VQA-v2</span>(视觉问答)、<span class="highlight">GQA</span>(推理问答)、<span class="highlight">MME</span>(多模态评估)等</li>
+            <li>包含理解(<span class="highlight">OKVQA</span>)、生成(<span class="highlight">POPE</span>)、推理(<span class="highlight">MM-Vet</span>)等多样化任务</li>
+            <li>测试分辨率从<span class="highlight">224px</span>到<span class="highlight">448px</span>不等，评估细粒度理解能力</li>
+          </ul>
+        </div>
+        <div class="content-section">
+          <h2><i class="fas fa-chart-line mr-2"></i>关键结果</h2>
+          <ul class="content-text list-disc pl-6 space-y-2">
+            <li>最佳模型<span class="highlight">VILA-13B</span>在<span class="highlight">80.8%</span>基准领先，加入<span class="highlight">ShareGPT4V</span>数据后提升<span class="highlight">3-7%</span></li>
+            <li><span class="highlight">Qwen-VL</span>在中文场景表现突出，图文生成质量优于<span class="highlight">Stable Diffusion</span></li>
+            <li>推理任务平均准确率<span class="highlight">58.7%</span>，较传统方案提升<span class="highlight">40%</span>以上</li>
+          </ul>
+        </div>
+      </div>
+      <!-- 右侧插图 -->
+      <div class="right-col flex items-center justify-center">
+        <div class="image-container">
+          <img src="images/5c74b5db8c6523237118734725936d26b41d1f2d8aee3bd5a0cfdf19523a6543.jpg" alt="Table 2: 详细性能对比表，红色/蓝色分别标记第一/第二名结果">
+          <div class="image-caption">Table 2: 详细性能对比表，红色/蓝色分别标记第一/第二名结果</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

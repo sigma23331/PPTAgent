@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>两阶段训练</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
+      color: white;
+      overflow: hidden;
+      position: relative;
+      padding: 2rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      counter-reset: content-section-count;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 0.75rem;
+    }
+
+    .content-section {
+      counter-increment: content-section-count;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(5px);
+    }
+
+    .slide-container:has(.content-section:nth-of-type(2):last-of-type) .content-section {
+      padding: 3rem;
+    }
+
+    .slide-container:not(:has(.content-section:nth-of-type(3):last-of-type)) .content-section {
+      padding: 2.5rem;
+    }
+
+    .content-text {
+      font-family: 'Georgia', serif;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .highlight {
+      color: #90cdf4;
+      font-weight: bold;
+    }
+
+    .image-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+    }
+
+    .image-caption {
+      color: #cbd5e0;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      font-style: italic;
+      text-align: center;
+    }
+
+    .geometric-shape {
+      position: absolute;
+      opacity: 0.1;
+      z-index: 0;
+    }
+
+    .shape-1 {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: white;
+      top: -150px;
+      right: -100px;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      height: 100%;
+    }
+
+    .left-col, .right-col {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .left-col:has(.content-section:only-child) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .left-col:has(.content-section:only-child) > .content-section {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="geometric-shape shape-1"></div>
+    <h1>两阶段训练</h1>
+    <div class="content-wrapper">
+      <!-- 左侧内容区域 -->
+      <div class="left-col">
+        <div class="content-section">
+          <h2><i class="fas fa-brain mr-2"></i>多模态预训练(PT)</h2>
+          <ul class="content-text list-disc pl-6 space-y-2">
+            <li>使用<span class="highlight">X-Text数据集</span>(图文对/交错图文语料)训练<span class="highlight">投影器</span></li>
+            <li>理解模型仅优化文本生成目标，生成模型需联合优化<span class="highlight">生成损失</span></li>
+            <li>典型数据集：<span class="highlight">LAION-5B</span>(59亿图文对)、<span class="highlight">COYO</span>(7.47亿)、<span class="highlight">Conceptual 12M</span>等</li>
+          </ul>
+        </div>
+        <div class="content-section">
+          <h2><i class="fas fa-tasks mr-2"></i>多模态指令微调(IT)</h2>
+          <ul class="content-text list-disc pl-6 space-y-2">
+            <li>将PT数据转换为<span class="highlight">指令感知格式</span>，增强<span class="highlight">零样本能力</span></li>
+            <li>包含<span class="highlight">监督微调(SFT)</span>和基于<span class="highlight">人类反馈的强化学习(RLHF)</span>两个阶段</li>
+            <li>SFT数据形式：单轮QA(如<span class="highlight">VQA数据</span>)或多轮对话(平均2-5轮)</li>
+          </ul>
+        </div>
+      </div>
+      <!-- 右侧插图 -->
+      <div class="right-col flex items-center justify-center">
+        <div class="image-container">
+          <img src="images/c6132e281b795253907bfea46bb8686cd7be26f815edc642bd4696d9c06bbff4.jpg" alt="Figure 3: 训练流程示意图，展示PT与IT阶段的数据流与优化目标">
+          <div class="image-caption">Figure 3: 训练流程示意图，展示PT与IT阶段的数据流与优化目标</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

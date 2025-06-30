@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LLM与生成组件</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+      <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+      .slide-container {
+        width: 1280px;
+        height: 720px;
+        background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
+        color: white;
+        font-family: 'Arial', sans-serif;
+        overflow: hidden;
+        position: relative;
+        padding: 4rem;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        font-size: 2.8rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 1rem;
+      }
+
+      .content-text {
+        font-family: 'Georgia', serif;
+        font-size: 1.2rem;
+        line-height: 1.6;
+        opacity: 0.9;
+      }
+
+      .content-section {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 1.5rem;
+        backdrop-filter: blur(5px);
+      }
+
+      .geometric-shape {
+        position: absolute;
+        opacity: 0.1;
+        z-index: 0;
+      }
+
+      .shape-1 {
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        background: white;
+        top: -200px;
+        right: -100px;
+      }
+
+      .content-wrapper {
+        position: relative;
+        z-index: 1;
+      }
+
+      .highlight {
+        color: #90cdf4;
+        font-weight: bold;
+      }
+
+      .future-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: rgba(255, 255, 255, 0.85);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container">
+      <div class="geometric-shape shape-1"></div>
+      <div class="content-wrapper">
+        <h1>LLM与生成组件</h1>
+
+        <div class="flex flex-row space-x-10">
+          <div class="w-1/2 flex flex-col items-center text-center">
+            <i class="fas fa-brain future-icon"></i>
+            <div class="content-section w-full">
+              <h2>LLM骨干</h2>
+              <ul class="content-text list-disc pl-8 space-y-4 text-left">
+                <li>继承<span class="highlight">零样本泛化</span>、<span class="highlight">思维链</span>等特性，处理跨模态语义理解与推理</li>
+                <li>主流选择：<span class="highlight">LLaMA-2</span>/<span class="highlight">Vicuna</span>等开源模型，参数量从7B到70B不等</li>
+                <li>可结合<span class="highlight">LoRA</span>等参数高效微调方法，新增参数&lt;0.1%</li>
+              </ul>
+            </div>
+          </div>
+          <div class="w-1/2 flex flex-col items-center text-center">
+            <i class="fas fa-project-diagram future-icon"></i>
+            <div class="content-section w-full">
+              <h2>输出投影器与生成器</h2>
+              <ul class="content-text list-disc pl-8 space-y-4 text-left">
+                <li>将LLM输出的信号token映射为生成器可理解的特征</li>
+                <li>模态生成器多采用现成<span class="highlight">LDM</span>模型：<span class="highlight">Stable Diffusion</span>(图像)/<span class="highlight">Zeroscope</span>(视频)</li>
+                <li>训练时通过<span class="highlight">VAE</span>+<span class="highlight">Unet</span>计算条件生成损失，优化投影器参数</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
