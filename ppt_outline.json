@@ -1,0 +1,223 @@
+{
+  "pages": [
+    {
+      "pageCategory": "标题页",
+      "specialContent": "MM-LLMs: Recent Advances in MultiModal Large Language Models",
+      "subTitle": "Duzhen Zhang1*, Yahan Vu2*, Chenxing Li1, Jiahua Dong3†, Dan Su1, Chenhui Chu2† and Dong Vu1",
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "目录页",
+      "specialContent": [
+        "引言",
+        "模型架构",
+        "训练流程",
+        "SOTA MM-LLMs",
+        "基准与性能",
+        "未来方向"
+      ],
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "章节标题页",
+      "chapterNumber": 1,
+      "specialContent": "引言",
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "具体内容页",
+      "specialContent": null,
+      "pageTheme": "MM-LLMs概述",
+      "pageTypeSet": [
+        "经典标题+内容型"
+      ],
+      "content": [
+        {
+          "unitSummary": "MM-LLMs的定义",
+          "unitText": [
+            "MM-LLMs通过成本效益高的训练策略增强现成的LLMs，以支持多模态输入或输出。"
+          ]
+        },
+        {
+          "unitSummary": "MM-LLMs的能力",
+          "unitText": [
+            "保留LLMs固有的推理和决策能力，同时赋能广泛的多模态任务。"
+          ]
+        }
+      ],
+      "figure": [
+        {
+          "name": "images/f3e3fbb451befa65f0f25bb012b276f66a90a8a60d81415e7517f42ce4adcb87.jpg",
+          "content": "Figure 1: MM-LLMs的时间线。"
+        }
+      ]
+    },
+    {
+      "pageCategory": "章节标题页",
+      "chapterNumber": 2,
+      "specialContent": "模型架构",
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "具体内容页",
+      "specialContent": null,
+      "pageTheme": "模型架构概述",
+      "pageTypeSet": [
+        "经典标题+内容型"
+      ],
+      "content": [
+        {
+          "unitSummary": "五大组件",
+          "unitText": [
+            "模态编码器、输入投影器、LLM骨干、输出投影器、模态生成器。"
+          ]
+        },
+        {
+          "unitSummary": "训练重点",
+          "unitText": [
+            "主要优化输入和输出投影器，因其轻量级特性，MM-LLMs可高效训练。"
+          ]
+        }
+      ],
+      "figure": [
+        {
+          "name": "images/4c3498d8bc851fa8c4f7f0a4f11d5dc4046191b69baaa9d2cb60b4d54585937a.jpg",
+          "content": "Figure 2: MM-LLMs的一般模型架构及各组件的实现选择。"
+        }
+      ]
+    },
+    {
+      "pageCategory": "章节标题页",
+      "chapterNumber": 3,
+      "specialContent": "训练流程",
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "具体内容页",
+      "specialContent": null,
+      "pageTheme": "训练阶段",
+      "pageTypeSet": [
+        "经典标题+内容型"
+      ],
+      "content": [
+        {
+          "unitSummary": "MM PT阶段",
+          "unitText": [
+            "利用XText数据集训练输入和输出投影器，实现多模态对齐。"
+          ]
+        },
+        {
+          "unitSummary": "MM IT阶段",
+          "unitText": [
+            "通过指令格式数据集微调预训练的MM-LLMs，增强零样本性能。"
+          ]
+        }
+      ],
+      "figure": [
+        {
+          "name": "images/c6132e281b795253907bfea46bb8686cd7be26f815edc642bd4696d9c06bbff4.jpg",
+          "content": "Figure 3: MM-LLMs的分类。"
+        }
+      ]
+    },
+    {
+      "pageCategory": "章节标题页",
+      "chapterNumber": 4,
+      "specialContent": "SOTA MM-LLMs",
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "具体内容页",
+      "specialContent": null,
+      "pageTheme": "主流MM-LLMs",
+      "pageTypeSet": [
+        "数据型"
+      ],
+      "content": [
+        {
+          "unitSummary": "模型比较",
+          "unitText": [
+            "总结了43种主流MM-LLMs的架构和训练数据集规模。"
+          ]
+        }
+      ],
+      "figure": [
+        {
+          "name": "images/3b09edb1127fd8f6f45fe3ce719528cd3e932f204ffc5127aa9a856ed82ddb45.jpg",
+          "content": "Table 1: 主流MM-LLMs的总结。"
+        }
+      ]
+    },
+    {
+      "pageCategory": "章节标题页",
+      "chapterNumber": 5,
+      "specialContent": "基准与性能",
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "具体内容页",
+      "specialContent": null,
+      "pageTheme": "性能对比",
+      "pageTypeSet": [
+        "数据型"
+      ],
+      "content": [
+        {
+          "unitSummary": "基准测试",
+          "unitText": [
+            "在18个视觉语言基准上比较主流MM-LLMs的性能。"
+          ]
+        }
+      ],
+      "figure": [
+        {
+          "name": "images/5c74b5db8c6523237118734725936d26b41d1f2d8aee3bd5a0cfdf19523a6543.jpg",
+          "content": "Table 2: 主流MM-LLMs在18个VL基准上的比较。"
+        }
+      ]
+    },
+    {
+      "pageCategory": "章节标题页",
+      "chapterNumber": 6,
+      "specialContent": "未来方向",
+      "pageTheme": null,
+      "content": []
+    },
+    {
+      "pageCategory": "具体内容页",
+      "specialContent": null,
+      "pageTheme": "研究方向",
+      "pageTypeSet": [
+        "多段落型"
+      ],
+      "content": [
+        {
+          "unitSummary": "更强大的模型",
+          "unitText": [
+            "扩展模态、多样化LLMs、提高MM IT数据集质量、增强MM生成能力。"
+          ]
+        },
+        {
+          "unitSummary": "更具挑战性的基准",
+          "unitText": [
+            "构建更大规模、包含更多模态的统一评估标准基准。"
+          ]
+        }
+      ],
+      "figure": []
+    },
+    {
+      "pageCategory": "结尾页",
+      "specialContent": "感谢聆听",
+      "pageTheme": null,
+      "content": []
+    }
+  ]
+}

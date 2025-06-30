@@ -1,0 +1,26 @@
+[
+  {
+    "type": "标题页",
+    "prompt": "你将收到一个 HTML 模板和一个页面大纲信息。请根据大纲内容，自动将模板中的占位符（如 {{ title }}、{{ subtitle }} 等）用实际内容替换，并返回完整的 HTML 页面代码。\n模板中的占位符说明如下：\n- {{ title }}：使用大纲中的 \"specialContent\"\n- {{ subtitle }}：总结整个PPT所介绍的主要内容，拟定一个副标题\"\n- {{ info1 }}：说明所属的研究领域类别\n- {{ info2 }}：使用固定值 \"2025年学术报告\"\n请只返回最终填充完毕的 HTML 页面代码。"
+  },
+  {
+    "type": "目录页",
+    "prompt": "你是一个前端网页生成助手，负责将页面模板与结构化数据结合，生成网页形式的 PPT 页面。请根据下面提供的 HTML 模板和页面内容大纲（JSON 格式）输出一份填充完整、可直接在浏览器中使用的 HTML 页面代码，用于展示目录页。\n【任务说明】\n将 {{ pageTitle }} 替换为 \"目录\"。\n遍历 specialContent 数组，为其中每一项创建一个 .toc-item，序号从 1 开始，依次编号。\n保留所有 HTML 结构和样式。\n输出完整 HTML 页面代码，不需要添加注释或额外文字。\n请确保 JavaScript 逻辑仍能根据条目数量调整行间距。\n只返回 HTML，不添加额外解释或注释。"
+  },
+  {
+    "type": "章节标题页",
+    "prompt": "请根据以下 HTML 模板和页面大纲信息，将对应内容自动填充到模板中，生成完整的章节标题页面 HTML。\n1. 将 {{ chapterNumber }} 替换为“第{{chapterNumber}}章”的形式；\n2. 将 {{ specialContent }} 替换为大纲中提供的章节标题文本；\n3. 保持原有 HTML 样式和结构完全不变；\n4. 忽略 pageTheme 和 content 字段（暂未使用），但可用注释保留位置；\n5. 返回完整且可用的 HTML 页面内容，不添加多余解释。注：ChapterNumber="
+  },
+  {
+    "type": "C",
+    "prompt": "请根据我提供的 HTML 模板和页面大纲内容，将大纲信息填充进模板中，并适当在页面结构中添加相关图标，使用 Font Awesome 图标库（已通过 CDN 引入）以增强语义识别和视觉层次，返回最终完整的 HTML 页面。要求如下：\n- 将 pageTheme 渲染到页面顶部作为 <h1>；\n- 将 content 中的每一项渲染为一个 .content-section 区块，包含小节标题 <h2> 和 <ul><li> 列表，列表项带有 content-text 样式；\n- 将 figure[0] 用于插图部分，name 字段作为 <img> 的 src，content 字段作为图注；\n- 在每个 unitText 项中，自动用 <span class=\"highlight\">...</span> 包裹重点词；\n- 使用原 HTML 模板结构，保持 Tailwind 样式和类名不变；\n- 保留背景装饰图层 .geometric-shape；\n- 返回完整 HTML 文件（含 <html> 和 <head> 标签）；注意：对于正文中的公式与数学变量说明部分，使用latex格式输出\n- 不需要任何解释，只输出最终 HTML 文件内容。"
+  },
+  {
+    "type": "B",
+    "prompt": "请根据以下 HTML 模板和页面大纲数据，将数据字段填充进占位符，生成完整的 HTML 页面。\n- pageTheme 渲染为顶部 <h1> 标题；\n- contentBlocks：数组，页面中左右两个内容单元；\n  - title：小节标题，显示在每个区块上方；\n  - icon：Font Awesome 图标类名，不含 fas；\n  - points：一个列表，数组中每一项为一条要点；\n    - 若要强调的词语或短语应标红，请用 <span class=\"highlight\">关键词</span> 包裹；\n    - 若有 HTML 语法或图标嵌入，请使用三括号 {{{ this }}} 保留 HTML 不转义。\n输出要求：\n1. 将 pageTheme 渲染为页面主标题；\n2. 每个 contentBlock 渲染为页面左右内容区，包含图标、标题、小节内容；\n3. 每个 points 条目渲染为 <ul><li>，支持内部高亮或图标；\n4. 图标使用 Font Awesome 的 fas fa-XXX 样式，选用适合的图标；\n5. 页面尺寸固定为 1280×720；\n6. 样式类名、结构不做更改，完全保留模板格式；\n7. 返回完整 HTML 页面（含 <html> 与 <head>）；注意：对于正文中的公式与数学变量说明部分，使用latex格式输出\n8. 不输出注释或解释说明，仅输出最终页面代码。"
+  },
+  {
+    "type": "A",
+    "prompt": "请根据以下 HTML 模板和页面大纲数据，将数据字段填充进模板中的占位符，生成完整静态页面。\n- pageTheme：页面主标题；\n- contentSections：数组（最多 3 个）：\n  - title: 内容小节标题，填入 <h2>；\n  - points: 列表内容，渲染为 <ul><li>；\n    - 若句中有高亮，请使用 <span class=\"highlight\">关键词</span> 包裹。\n输出要求：\n- 页面尺寸固定为 1280×720；\n- 最多展示 3 个 .content-section；\n- 每个 .content-section 自动均分高度；\n- 不出现滚动条、不超出页面；\n- 返回完整 HTML 页面（含 <html> 与 <head> 标签）；注意：对于正文中的公式与数学变量说明部分，使用latex格式输出\n- 不包含说明文字，只输出最终结果。"
+  }
+]
